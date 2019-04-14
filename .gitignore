@@ -1,0 +1,11 @@
+*~
+*.pyc
+*.DS_Store
+.idea/*
+.ipynb_checkpoints/*
+*.xls
+__pycache__/*
+*.aux
+*.log
+*.out
+*.synctex.gz
