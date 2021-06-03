@@ -54,7 +54,7 @@ def solve_qp(hessian, weights, coeffs, constants, num_eq, rho=0.1, max_iter=1000
 		objective = 0.5 * x.dot(hessian).dot(x) - weights.dot(x)
 		violations = coeffs.T.dot(x) - constants
 		clipped_violations = violations.copy()
-		clipped_violations[num_eq:] = np.clip(violations[num_eq:], a_min=None, a_max=0)
+		clipped_violations[num_eq:] = np.clip(violations[num_eq:], a_min=0, a_max=None)
 
 		linear_lagrange = gamma.dot(violations)
 		augmented_term = 0.5 * rho * clipped_violations.dot(clipped_violations)
@@ -79,7 +79,7 @@ def solve_qp(hessian, weights, coeffs, constants, num_eq, rho=0.1, max_iter=1000
 		# update gamma
 		violations = coeffs.T.dot(x) - constants
 		gamma += rho * violations
-		gamma[num_eq:] = np.clip(gamma[num_eq:], a_min=None, a_max=0)
+		gamma[num_eq:] = np.clip(gamma[num_eq:], a_min=0, a_max=None)
 
 		if verbose:
 			objectives.append(augmented_lagrangian)
